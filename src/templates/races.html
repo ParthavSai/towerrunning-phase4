@@ -1,0 +1,20 @@
+{% extends 'base.html' %}{% block title %}Race Calendar{% endblock %}
+{% block content %}
+<section class="page-banner"><div class="container"><div class="eyebrow eyebrow-light">EXPLORE THE GLOBAL CIRCUIT</div><h1>RACE <span>CALENDAR.</span></h1><p>From landmark skyscrapers to outdoor staircases. Find your next ascent.</p></div></section>
+<section class="section page-section"><div class="container">
+ <div class="filter-panel"><div class="filter-header"><h2>FIND YOUR RACE</h2><span>{{ items|length }} editions found</span></div>
+ <form method="get" action="{{ url_for('races') }}" class="filters filters-four">
+ <label>Search name / venue<input name="q" value="{{ filters.q }}" placeholder="Try Barcelona, PingAn, tower..."></label>
+ <label>City<input name="city" value="{{ filters.city }}" placeholder="Search city"></label>
+ <label>Year<input type="number" min="2000" max="2100" name="year" value="{{ filters.year or '' }}" placeholder="e.g. 2026"></label>
+ <label>Race factor<select name="factor"><option value="">All factors</option>{% for f in [40,60,80,120,160,200,240,280] %}<option value="{{ f }}" {{ 'selected' if filters.factor == f else '' }}>{{ f }}</option>{% endfor %}</select></label>
+ <button class="btn btn-orange" type="submit">Search races <span>↗</span></button><a class="filter-reset" href="{{ url_for('races') }}">Clear filters ×</a>
+ </form></div>
+ {% if items %}<div class="race-list">{% for e in items %}<a class="race-row" href="{{ url_for('race_detail',event_id=e.RaceEventID,occurrence=e.OccurrenceNo) }}">
+  <div class="race-date-box"><strong>{{ e.StartDate.strftime('%d') if e.StartDate else '—' }}</strong><span>{{ e.StartDate.strftime('%b')|upper if e.StartDate else 'TBA' }}</span></div>
+  <div class="race-main"><div class="race-small">{{ e.CompetitionName or 'TOWERRUNNING EVENT' }} {% if e.ResultCount %}<span class="dot-sep">•</span> <span class="text-turquoise">RESULTS AVAILABLE</span>{% endif %}</div><h3>{{ e.RaceName }}</h3><p>⌖ {{ e.City or e.VenueName or (e.Description|replace('Official Towerrunning 2026 Tour calendar city: ','')|replace('.','')) or 'Venue not published' }}{% if e.VenueName %} · {{ e.VenueName }}{% endif %}</p></div>
+  <div class="race-meta"><div><small>RACE FACTOR</small><b>{{ e.RaceFactor or '—' }}</b></div><div><small>RESULT ROWS</small><b>{{ e.ResultCount }}</b></div></div><span class="circle-arrow">↗</span>
+ </a>{% endfor %}</div>{% else %}<div class="empty-state"><span>⌕</span><h3>No races match those filters</h3><p>Try another event name, city or factor.</p><a href="{{ url_for('races') }}" class="btn btn-primary">View all races →</a></div>{% endif %}
+ <div class="info-note">Data comes from the official Towerrunning 2026 Tour listing and sourced race detail pages. Missing course details or results are shown as unavailable rather than fabricated.</div>
+</div></section>
+{% endblock %}

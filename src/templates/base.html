@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a3f">
+  <meta name="description" content="A data-driven view of the world of stair racing: Towerrunning events, athletes, race results and records.">
+  <title>{% block title %}TowerRunning{% endblock %} — Elevate the Race</title>
+  <link rel="icon" href="{{ url_for('static',filename='assets/favicon.svg') }}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="announcement"><span class="announce-dot"></span> TOWERRUNNING DATA EXPLORER <span class="announce-sep">/</span> 2026 SEASON <span class="announce-right">Academic database implementation • Official sources linked</span></div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{{ url_for('home') }}" aria-label="TowerRunning home">
+        <span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 42 42" fill="none"><path d="M6 34h8V24h8V15h8V7h6v27" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M6 35h30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span>
+        <span class="brand-word">TOWER<span>RUNNING</span><small>REACH HIGHER</small></span>
+      </a>
+      <button class="mobile-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a class="{{ 'active' if active == 'home' else '' }}" href="{{ url_for('home') }}">Home</a>
+        <a class="{{ 'active' if active == 'races' else '' }}" href="{{ url_for('races') }}">Races</a>
+        <a class="{{ 'active' if active == 'athletes' else '' }}" href="{{ url_for('athletes') }}">Athletes</a>
+        <a class="{{ 'active' if active == 'rankings' else '' }}" href="{{ url_for('rankings') }}">Rankings</a>
+        <a class="{{ 'active' if active == 'records' else '' }}" href="{{ url_for('records') }}">Records</a>
+        <a class="{{ 'active' if active == 'insights' else '' }}" href="{{ url_for('insights') }}">Insights</a>
+        <a class="{{ 'active' if active == 'venues' else '' }}" href="{{ url_for('venues') }}">Venues</a>
+        <a class="nav-admin {{ 'active' if active == 'manage' else '' }}" href="{{ url_for('manage') }}">Manage <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}<div class="container alerts" aria-live="polite">
+      {% for category,message in messages %}<div class="alert alert-{{ category }}"><span>{{ '✓' if category == 'success' else '!' }}</span>{{ message }}<button type="button" class="alert-close" aria-label="Dismiss" data-close>×</button></div>{% endfor %}
+    </div>{% endif %}
+  {% endwith %}
+  <main id="main-content">{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand brand-footer"><span class="brand-icon" aria-hidden="true">↗</span><span class="brand-word">TOWER<span>RUNNING</span><small>DATA EXPLORER</small></span></div>
+        <p>Every step tells a story. Explore the people, places and performances behind stair racing worldwide.</p>
+        <div class="footer-tags"><span>Powered by MySQL</span><span>Built with Flask</span></div>
+      </div>
+      <div><h3>Explore</h3><a href="{{ url_for('races') }}">Race calendar</a><a href="{{ url_for('athletes') }}">Athletes</a><a href="{{ url_for('rankings') }}">Rankings</a><a href="{{ url_for('insights') }}">Insights &amp; reports</a><a href="{{ url_for('records') }}">Course records</a></div>
+      <div><h3>Project</h3><a href="{{ url_for('venues') }}">Venue directory</a><a href="{{ url_for('manage') }}">Draft management</a><a href="https://www.towerrunning.com/" target="_blank" rel="noopener noreferrer">Official Towerrunning ↗</a><a href="https://www.towerrunning.com/ranking/" target="_blank" rel="noopener noreferrer">Official rankings ↗</a></div>
+      <div class="footer-highlight"><h3>GO BEYOND LIMITS</h3><p>Climb the leaderboard. Discover the world's most demanding vertical challenges.</p><a href="{{ url_for('races') }}" class="btn btn-light btn-sm">Explore races <span>→</span></a></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 TowerRunning Data Explorer · Student database project</span><span>Not affiliated with the Towerrunning World Association. Data attributed to original sources.</span></div>
+  </footer>
+  <script src="{{ url_for('static',filename='main.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

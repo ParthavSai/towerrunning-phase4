@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}The World of Vertical Racing{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="container hero-wrap">
+    <div class="hero-copy">
+      <div class="eyebrow eyebrow-light"><span class="pulse"></span> THE WORLD OF VERTICAL RACING <span class="eyebrow-line"></span> 2026</div>
+      <h1>CHASE<br>THE <span class="hero-highlight">HEIGHTS.</span></h1>
+      <p>One global community. Thousands of steps. Discover iconic races, fearless athletes and the numbers behind every climb.</p>
+      <div class="hero-buttons"><a href="{{ url_for('races') }}" class="btn btn-orange">Discover races <span>↗</span></a><a class="btn btn-outline-white" href="{{ url_for('rankings') }}">Explore rankings <span>→</span></a></div>
+      <div class="hero-social"><div class="avatar-stack"><span>TR</span><span>UP</span><span>GO</span></div><div><strong>Climb the world.</strong><small>One staircase at a time.</small></div></div>
+    </div>
+    <div class="hero-art" aria-hidden="true"><img src="{{ url_for('static',filename='assets/skyline.svg') }}" alt=""><div class="hero-circle"></div><div class="hero-vertical">THE SUMMIT IS ONLY THE BEGINNING</div><div class="hero-chip hero-chip-top"><span class="chip-icon">↗</span><div><b>VERTICAL RUNNING</b><small>Global race community</small></div></div><div class="hero-chip hero-chip-bottom"><span class="chip-wreath">✦</span><div><b>2026 SEASON</b><small>Push beyond your limits</small></div></div></div>
+  </div>
+  <div class="hero-bottom-line"><span>01 / EXPLORE THE SPORT</span><span>SCROLL TO DISCOVER ↓</span></div>
+</section>
+<section class="stats-section">
+ <div class="container stats-grid">
+  <div class="stat-item"><div class="stat-symbol">◉</div><div><strong>{{ counts.races }}</strong><span>Race events</span></div></div>
+  <div class="stat-item"><div class="stat-symbol">↗</div><div><strong>{{ counts.editions }}</strong><span>Race editions</span></div></div>
+  <div class="stat-item"><div class="stat-symbol">♟</div><div><strong>{{ counts.athletes }}</strong><span>Registered athletes</span></div></div>
+  <div class="stat-item"><div class="stat-symbol">★</div><div><strong>{{ counts.results }}</strong><span>Published result rows</span></div></div>
+ </div>
+</section>
+<section class="section section-events">
+  <div class="container"><div class="section-head"><div><div class="eyebrow">UPCOMING & FEATURED <span class="eyebrow-line"></span> EVENTS</div><h2>THE NEXT <em>CHALLENGE.</em></h2><p>Explore featured races and the world's most recognisable stair-climbing events.</p></div><a href="{{ url_for('races') }}" class="text-link">View race calendar <span>↗</span></a></div>
+  <div class="event-grid">
+    {% for e in events %}<a class="event-card" href="{{ url_for('race_detail',event_id=e.RaceEventID,occurrence=e.OccurrenceNo) }}">
+      <div class="event-top"><span class="event-category">{{ 'RESULTS AVAILABLE' if e.ResultCount else 'TOUR EVENT' }}</span><span class="event-arrow">↗</span></div>
+      <div class="event-date"><span>{{ e.StartDate.strftime('%d') if e.StartDate else '—' }}</span><small>{{ e.StartDate.strftime('%b %Y')|upper if e.StartDate else 'TBA' }}</small></div>
+      <h3>{{ e.RaceName }}</h3><div class="event-foot"><span>⌖ {{ e.City or e.VenueName or 'Worldwide' }}</span><b>FACTOR {{ e.RaceFactor or '—' }}</b></div>
+    </a>{% endfor %}
+  </div></div>
+</section>
+<section class="feature-band"><div class="container feature-inner"><div><div class="eyebrow eyebrow-light">MORE THAN A RACE</div><h2>VERTICAL IS<br><span>A MINDSET.</span></h2><p>From Kuala Lumpur to Barcelona, every finish line starts with a first step.</p><a href="{{ url_for('athletes') }}" class="btn btn-white">Meet the athletes <span>↗</span></a></div><div class="feature-steps"><div class="step step-1">01 <span>THE START</span></div><div class="step step-2">02 <span>THE CLIMB</span></div><div class="step step-3">03 <span>THE SUMMIT</span></div></div></div></section>
+<section class="section section-explore"><div class="container"><div class="section-head"><div><div class="eyebrow">YOUR WORLD, YOUR RACE</div><h2>EXPLORE <em>MORE.</em></h2></div></div><div class="explore-grid">
+<a class="explore-card explore-one" href="{{ url_for('athletes') }}"><div class="explore-icon">♟</div><span>ATHLETE DATABASE</span><h3>People behind<br>the podium.</h3><div>View athlete profiles, countries and racing history <b>↗</b></div></a>
+<a class="explore-card explore-two" href="{{ url_for('rankings') }}"><div class="explore-icon">★</div><span>PERFORMANCE INSIGHTS</span><h3>Every point<br>matters.</h3><div>Compare source-linked points from imported events <b>↗</b></div></a>
+<a class="explore-card explore-three" href="{{ url_for('records') }}"><div class="explore-icon">⌁</div><span>COURSE RECORDS</span><h3>Built to break<br>boundaries.</h3><div>Discover documented course-record holders <b>↗</b></div></a>
+</div></div></section>
+{% endblock %}

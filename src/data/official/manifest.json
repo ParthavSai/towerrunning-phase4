@@ -1,0 +1,26 @@
+{
+  "basics.pdf": {
+    "url": "https://www.towerrunning.com/splits/TWA%20Ranking%20Basics.pdf",
+    "sha256": "068572f964f874a790355f8d09d21d94fb302092cd4a746c23e8f8c30416426a"
+  },
+  "organizers.pdf": {
+    "url": "https://www.towerrunning.com/splits/TWA%20Organizers%20Info.pdf",
+    "sha256": "11f39d987074a6245f32cda593992209831a8a4587e5f5f53ec8eba2b58ff5e2"
+  },
+  "matrix.xlsx": {
+    "url": "https://www.towerrunning.com/splits/TWA%20Scoring%20Matrix.xlsx",
+    "sha256": "cfaa828f14d75cde23f857e4485f1e2e77e6ce4323a0e8b41fac956987d01cca"
+  },
+  "final2025.xlsx": {
+    "url": "https://www.towerrunning.com/wp-content/uploads/2025/12/TWA-Ranking-Final-2025.xlsx",
+    "sha256": "c324060021d9e3eb68de0752a66fa9a20807ddfc4ee2e681cc89743ebb5b2f37"
+  },
+  "july2026.xlsx": {
+    "url": "https://www.towerrunning.com/wp-content/uploads/2026/08/TWA-Ranking-July-2026.xlsx",
+    "sha256": "a28cc2d2f790fa602519cef056c9af3bba1550eecb79533d8d9e2a2f0930c75a"
+  },
+  "final2019.xlsx": {
+    "url": "https://www.towerrunning.com/wp-content/uploads/2024/02/TWA-Ranking-November-2019-Season-Final.xlsx",
+    "sha256": "6f05f362a599df76ceee9d70af1a6520afccc9b199ed75d422beb270689fc592"
+  }
+}

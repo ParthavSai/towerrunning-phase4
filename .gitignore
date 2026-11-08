@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+!.env.example
+
+read/
+*.dump
+*.bak
+*.sql.gz
+submission_pending.zip
+*.mp4
+
+.vscode/
+.idea/
